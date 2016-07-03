@@ -17,6 +17,6 @@ p: print gcode
 f: show overlap of lines
 z: export settings
 t: inport settings
-
+ 
 
 For bit and material settings edit app.pde!
