@@ -177,7 +177,7 @@ void setup() {
 
 void draw() {
   background(255);
-  translate(materialX,materialY);
+  translate(materialX*scF,materialY*scF);
   
   if (!render && image != null) {
     image(image, imgX*scF, imgY*scF, imgW*scF, imgW*scF*imgF);
@@ -203,20 +203,20 @@ void draw() {
 
   fill(255);
   noStroke();
-  rect(0,0,(int)borderW/2, height);
-  rect(0,0,width, (int)borderH/2);
-  rect(width-(borderW/2),0,(int)borderW/2, height);
-  rect(0,height-(borderH/2),width, (int)borderH/2);
+  rect(0,0,(int)borderW*scF/2, height);
+  rect(0,0,width, (int)borderH*scF/2);
+  rect(width-(borderW*scF/2),0,(int)borderW*scF/2, height);
+  rect(0,height-(borderH*scF/2),width, (int)borderH*scF/2);
   
   
-  translate(-materialX,-materialY);
+  translate(-materialX*scF,-materialY*scF);
   fill(30);
-  rect(0,0,materialX,height);
-  rect(0,0,width,materialY);
-  rect(0,height-materialY,width,materialY);
-  rect(width-materialX,0,materialX,height);
+  rect(0,0,materialX*scF,height);
+  rect(0,0,width,materialY*scF);
+  rect(0,height-materialY*scF,width,materialY*scF);
+  rect(width-materialX*scF,0,materialX*scF,height);
   
-  translate(materialX,materialY);
+  translate(materialX*scF,materialY*scF);
   if (!render) {
     noFill();
     stroke(0);
@@ -245,7 +245,7 @@ void draw() {
     text(distance,90,10);
     text(maxRad, 130,10);
   }
-  translate(-materialX,-materialY);
+  translate(-materialX*scF,-materialY*scF);
 }
 
 void imgFilter() {
@@ -341,7 +341,7 @@ void printGcode(File selection) {
     for (int j = 0; j < avgs.get(i).size(); j++) {
       Point p = new Point(avgs.get(i).get(j).x, avgs.get(i).get(j).y, avgs.get(i).get(j).data);
       p.y = materialH-p.y;
-      if (p.x < borderW/2 || p.x > materialW-(borderW/2) || p.y < materialH/2 || p.y > materialH-(borderH/2)) {
+      if (p.x < borderW/2 || p.x > materialW-(borderW/2) || p.y < borderH/2 || p.y > materialH-(borderH/2)) {
         if (in) {
           output.add("G1 Z"+hOut+" F"+sIn);
           in = false;
